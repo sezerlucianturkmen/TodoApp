@@ -3,7 +3,6 @@ package com.app.todo.service;
 import com.app.todo.dto.request.*;
 import com.app.todo.dto.response.*;
 import com.app.todo.entity.ToDo;
-import com.app.todo.entity.enums.Priority;
 import com.app.todo.entity.enums.Status;
 import com.app.todo.exception.*;
 import com.app.todo.mapper.ToDoMapper;
@@ -11,8 +10,7 @@ import com.app.todo.repository.ToDoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
