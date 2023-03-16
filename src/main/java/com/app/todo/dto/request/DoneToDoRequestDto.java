@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class DoneToDoRequestDto {
-    @NotBlank
+
     @NotNull
     private Long id;
 

@@ -5,24 +5,43 @@ server:
     context-path: /api/v1
     encoding:
       charset: UTF-8
-
 spring:
   datasource:
-    driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:XEPDB1
-    username: SYSTEM
-    password: root
-    oracleucp:
-      connection-factory-class-name: oracle.jdbc.pool.OracleDataSource
-      s-q-l-for-validate-connection: select * from dual
-      connection-pool-name: connectionPoolName1
-      initial-pool-size: 15
-      min-pool-size: 10
-      max-pool-size: 30
+    username: 'postgres'
+    password: 'root'
+    url: 'jdbc:postgresql://localhost:5432/DistaDB'
+    driver-class-name: org.postgresql.Driver
+
   jpa:
-    database-platform: org.hibernate.dialect.Oracle12gDialect
-    open-in-view: true
     hibernate:
       ddl-auto: create-drop
     show-sql: true
+
+#spring:
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: create-drop
+#    open-in-view: false
+#    database-platform: org.hibernate.dialect.OracleDialect
+#    properties:
+#      hibernate:
+#        temp:
+#          use_jdbc_metadata_defaults: false
+#
+#  datasource:
+#    hikari:
+#      connection-timeout: 30000
+#      idle-timeout: 600000
+#      max-lifetime: 1800000
+#      maximum-pool-size: 10
+#    url: jdbc:oracle:thin:@192.168.0.101:1521/XEPDB1
+#    username: SYSTEM
+#    password: root
+#    driver-class-name: oracle.jdbc.OracleDriver
+#    type: com.zaxxer.hikari.HikariDataSource
+#  main:
+#    allow-bean-definition-overriding: true
+#    lazy-initialization: true
+
 

@@ -1,5 +1,6 @@
 package com.app.todo.dto.request;
 
+import com.app.todo.entity.enums.Priority;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -14,5 +15,6 @@ public class CreateToDoRequestDto {
     @NotNull
     private String title;
     private String description;
-    private LocalDateTime date;
+    private String date;
+    private Priority priority;
 }

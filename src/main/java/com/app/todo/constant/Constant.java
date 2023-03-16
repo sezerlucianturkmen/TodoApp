@@ -6,6 +6,7 @@ public class Constant {
     public static final String CREATE = "/create";
     public static final String FINDALL = "/findall";
     public static final String FINDALLINPROGRESS = "/findallinprogress";
+    public static final String FINDALLDONE = "/findalldone";
     public static final String DONE = "/done";
     public static final String UPDATE = "/update";
 }

@@ -36,6 +36,10 @@ public class ToDoController {
     public ResponseEntity<List<ToDoResponseDto>> findAllToDosInProgress(){
         return ResponseEntity.ok(toDoService.findAllToDosInProgress());
     }
+    @GetMapping(FINDALLDONE)
+    public ResponseEntity<List<ToDoResponseDto>> findAllToDosDone(){
+        return ResponseEntity.ok(toDoService.findAllToDosDone());
+    }
     @PostMapping(UPDATE)
     public ResponseEntity<ToDoResponseDto> updateTodo(@RequestBody @Valid UpdateToDoRequestDto dto) {
         return ResponseEntity.ok(toDoService.updateToDo(dto));
