@@ -20,4 +20,5 @@ public class UpdateToDoRequestDto {
     private String description;
     private String date;
     private Priority priority;
+    private String token;
 }

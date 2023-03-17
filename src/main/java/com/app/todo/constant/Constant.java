@@ -10,4 +10,5 @@ public class Constant {
     public static final String DONE = "/done";
     public static final String UPDATE = "/update";
     public static final String FILTERBYKEYWORD = "/filterbykeyword";
+    public static final String FILTERBYPRIORITY = "/filterbypriority";
 }

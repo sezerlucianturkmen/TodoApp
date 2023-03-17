@@ -17,4 +17,7 @@ public class CreateToDoRequestDto {
     private String description;
     private String date;
     private Priority priority;
+    @NotBlank
+    @NotNull
+    private String Token;
 }

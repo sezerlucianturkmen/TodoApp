@@ -14,5 +14,6 @@ public class FilterToDoRequestDto {
     @NotBlank
     @NotNull
     private String keyword;
+    private String token;
 
 }

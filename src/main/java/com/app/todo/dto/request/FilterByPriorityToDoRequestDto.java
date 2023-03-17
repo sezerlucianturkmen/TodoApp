@@ -4,17 +4,17 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
-public class DoneToDoRequestDto {
-
+public class FilterByPriorityToDoRequestDto {
+    @NotBlank
     @NotNull
-    private Long id;
+    private String priority;
+    @NotBlank
+    @NotNull
     private String token;
 
 }

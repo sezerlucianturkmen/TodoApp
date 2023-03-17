@@ -29,4 +29,8 @@ public class ToDo extends Base {
     @Enumerated(EnumType.STRING)
     @Column(name = "priority")
     private Priority priority;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
