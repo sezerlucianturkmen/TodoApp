@@ -2,6 +2,7 @@ package com.app.todo.controller;
 
 import com.app.todo.dto.request.CreateToDoRequestDto;
 import com.app.todo.dto.request.DoneToDoRequestDto;
+import com.app.todo.dto.request.FilterToDoRequestDto;
 import com.app.todo.dto.request.UpdateToDoRequestDto;
 import com.app.todo.dto.response.ToDoResponseDto;
 import com.app.todo.service.ToDoService;
@@ -26,7 +27,7 @@ public class ToDoController {
     }
     @PostMapping(DONE)
     public ResponseEntity<ToDoResponseDto> doneToDo(@RequestBody @Valid DoneToDoRequestDto dto) {
-        return ResponseEntity.ok(toDoService.doneTone(dto));
+        return ResponseEntity.ok(toDoService.doneToDo(dto));
     }
     @GetMapping(FINDALL)
     public ResponseEntity<List<ToDoResponseDto>> findAllToDos(){
@@ -40,8 +41,12 @@ public class ToDoController {
     public ResponseEntity<List<ToDoResponseDto>> findAllToDosDone(){
         return ResponseEntity.ok(toDoService.findAllToDosDone());
     }
-    @PostMapping(UPDATE)
+    @PutMapping(UPDATE)
     public ResponseEntity<ToDoResponseDto> updateTodo(@RequestBody @Valid UpdateToDoRequestDto dto) {
         return ResponseEntity.ok(toDoService.updateToDo(dto));
+    }
+    @PostMapping(FILTERBYKEYWORD)
+    public ResponseEntity<List<ToDoResponseDto>>  filterByKeyword(@RequestBody @Valid FilterToDoRequestDto dto) {
+        return ResponseEntity.ok(toDoService.filterByKeyword(dto));
     }
 }

@@ -23,7 +23,7 @@ public class ToDoService {
         return ToDoMapper.INSTANCE.toToDoResponseDto(toDoRepository.save(toDo));
     }
 
-    public ToDoResponseDto doneTone(DoneToDoRequestDto dto) {
+    public ToDoResponseDto doneToDo(DoneToDoRequestDto dto) {
         ToDo toDo = toDoRepository.findById(dto.getId()).orElseThrow(()-> new ToDoManagerException(ErrorType.TODO_NOT_FOUND));
         toDo.setStatus(Status.DONE);
         return ToDoMapper.INSTANCE.toToDoResponseDto(toDoRepository.save(toDo));
@@ -51,13 +51,16 @@ public class ToDoService {
 
     public ToDoResponseDto updateToDo(UpdateToDoRequestDto dto) {
         ToDo toDo = toDoRepository.findById(dto.getId()).orElseThrow(()-> new ToDoManagerException(ErrorType.TODO_NOT_FOUND));
-        toDo.setTitle(dto.getTitle());
-        toDo.setDescription(dto.getDescription());
-        toDo.setDate(dto.getDate());
-        toDo.setPriority(dto.getPriority());
+        ToDoMapper.INSTANCE.update(toDo,dto);
         return ToDoMapper.INSTANCE.toToDoResponseDto(toDoRepository.save(toDo));
     }
 
-
-
+    public List<ToDoResponseDto> filterByKeyword(FilterToDoRequestDto dto) {
+        List<ToDo> toDoList = Optional.of(toDoRepository.findAll()).orElseThrow(()-> new ToDoManagerException(ErrorType.TODO_NOT_FOUND));
+        return Optional.of(toDoList.stream()
+                .filter(toDo-> toDo.getTitle().toLowerCase().contains(dto.getKeyword().trim().toLowerCase())
+                        || toDo.getDescription().toLowerCase().contains(dto.getKeyword().trim().toLowerCase()))
+                .map(ToDoMapper.INSTANCE::toToDoResponseDto)
+                .collect(Collectors.toList())).orElseThrow(()-> new ToDoManagerException(ErrorType.NO_RESULT));
+    }
 }
