@@ -5,6 +5,7 @@ import com.app.todo.dto.request.*;
 import com.app.todo.dto.response.*;
 import com.app.todo.entity.ToDo;
 import com.app.todo.entity.User;
+import com.app.todo.entity.enums.Priority;
 import com.app.todo.entity.enums.Status;
 import com.app.todo.exception.*;
 import com.app.todo.mapper.ToDoMapper;
@@ -27,6 +28,7 @@ public class ToDoService {
         String email = jwtService.extractUsername(dto.getToken());
         User user = userRepository.findByEmail(email).get();
         ToDo toDo = ToDoMapper.INSTANCE.toToDo(dto);
+        toDo.setPriority(Priority.valueOf(dto.getPriorityString()));
         toDo.setUser(user);
         return ToDoMapper.INSTANCE.toToDoResponseDto(toDoRepository.save(toDo));
     }
@@ -63,6 +65,7 @@ public class ToDoService {
     public ToDoResponseDto updateToDo(UpdateToDoRequestDto dto) {
         String email = jwtService.extractUsername(dto.getToken());
         ToDo toDo = toDoRepository.findUserToDoById(dto.getId(),email).orElseThrow(()-> new ToDoManagerException(ErrorType.TODO_NOT_FOUND));
+        toDo.setPriority(Priority.valueOf(dto.getPriorityString()));
         ToDoMapper.INSTANCE.update(toDo,dto);
         return ToDoMapper.INSTANCE.toToDoResponseDto(toDoRepository.save(toDo));
     }
@@ -84,5 +87,13 @@ public class ToDoService {
                 .filter(toDo-> toDo.getPriority().toString().toUpperCase().contains(dto.getPriority().trim().toUpperCase()))
                 .map(ToDoMapper.INSTANCE::toToDoResponseDto)
                 .collect(Collectors.toList())).orElseThrow(()-> new ToDoManagerException(ErrorType.NO_RESULT));
+    }
+
+    public Boolean deleteToDo(DeleteToDoRequestDto dto) {
+        String email = jwtService.extractUsername(dto.getToken());
+        ToDo toDo = toDoRepository.findUserToDoById(dto.getId(),email).orElseThrow(()-> new ToDoManagerException(ErrorType.TODO_NOT_FOUND));
+        toDoRepository.delete(toDo);
+        return true;
+
     }
 }

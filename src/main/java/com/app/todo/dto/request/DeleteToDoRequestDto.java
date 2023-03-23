@@ -1,24 +1,19 @@
 package com.app.todo.dto.request;
 
-import com.app.todo.entity.enums.Priority;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
-import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
-public class UpdateToDoRequestDto {
-
-    private String title;
+public class DeleteToDoRequestDto {
+    @NotBlank
+    @NotNull
+    private String token;
     @NotNull
     private Long id;
-    private String description;
-    private String date;
-    private String priorityString;
-    private String token;
 }

@@ -7,24 +7,24 @@ import com.app.todo.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ResponseEntity<AuthenticationResponseDto> register(@RequestBody @Valid RegisterRequestDto dto) {
         return ResponseEntity.ok(authService.register(dto));
     }
 
     @PostMapping("/authenticate")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ResponseEntity<AuthenticationResponseDto> authenticate(@RequestBody @Valid LoginRequestDto dto) {
         return ResponseEntity.ok(authService.authenticate(dto));
     }
